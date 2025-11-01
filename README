@@ -1,0 +1,246 @@
+# 🚗 Steering Wheel Repair Data Analysis
+
+A comprehensive Python-based data analysis tool for analyzing steering wheel repair data from automotive warranty claims. This script performs end-to-end analysis including data cleaning, visualization, and automated tag generation from free-text fields.
+
+## 📋 Features
+
+- **Column-wise Analysis**: Detailed breakdown of each column including data types, null values, and distributions
+- **Data Cleaning**: Automated handling of missing values, text standardization, and format corrections
+- **Critical Column Identification**: Identifies top 5 most important columns with business reasoning
+- **Visualizations**: Generates 3 publication-ready charts (8 total visualizations)
+- **Tag Generation**: Automatically extracts issue types from free-text fields using keyword matching
+- **Comprehensive Reporting**: Provides actionable insights and recommendations for stakeholders
+
+## 🛠️ Requirements
+
+```bash
+pandas
+numpy
+matplotlib
+seaborn
+openpyxl  # for reading Excel files
+```
+
+Install dependencies:
+```bash
+pip install pandas numpy matplotlib seaborn openpyxl
+```
+
+## 🚀 Quick Start
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/spoorthyan/steering-wheel-analysis.git
+cd steering-wheel-analysis
+```
+
+2. **Update file paths** in the script (lines 16-17):
+```python
+INPUT_FILE = r"path/to/your/data.xlsx"
+OUTPUT_FILE = r"path/to/output/cleaned_data.csv"
+```
+
+3. **Run the analysis**
+```bash
+python steering_analysis.py
+```
+
+## 📊 Output Files
+
+The script generates the following outputs:
+
+| File | Description |
+|------|-------------|
+| `steering_wheel_analysis.png` | 4-panel dashboard with platform distribution, faulty components, repair costs, and repair types |
+| `detailed_analysis.png` | Cost by platform and vehicle age analysis |
+| `issue_tags_analysis.png` | Horizontal bar chart of automatically generated issue tags |
+| `cleaned_steering_wheel_data.csv` | Cleaned dataset with generated tags |
+
+## 📈 Analysis Components
+
+### 1. Column-wise Analysis
+- Data type identification
+- Null value analysis
+- Unique value counts
+- Distribution summaries for categorical columns
+
+### 2. Data Cleaning
+- Drops columns with 100% null values
+- Fills missing categorical values with "Unknown"
+- Fills missing numerical values with median
+- Standardizes text (removes whitespace, title case)
+- Converts date columns to datetime format
+
+### 3. Critical Columns
+
+The script identifies these 5 critical columns:
+
+| Column | Business Importance |
+|--------|---------------------|
+| `PLATFORM` | Vehicle platform identification for model-specific issues |
+| `CAUSAL_PART_NM` | Root cause component analysis |
+| `GLOBAL_LABOR_CODE_DESCRIPTION` | Repair action patterns |
+| `TOTALCOST` | Financial impact and warranty cost analysis |
+| `REPAIR_AGE` | Reliability and warranty period optimization |
+
+### 4. Automated Tag Generation
+
+Extracts 7 issue categories from free-text fields:
+
+- 🔥 **Heating Issues**: Temperature control problems
+- ⚡ **Electrical Issues**: Circuit and wiring faults
+- 🎨 **Cosmetic Issues**: Surface finish problems
+- 🛡️ **Safety System Issues**: Airbag, horn, driver assist
+- 💻 **Software Issues**: Programming and calibration
+- 🔧 **Mechanical Issues**: Physical component problems
+- 📦 **Material Failures**: Leather, stitching, fabric issues
+
+### 5. Synthesis Report
+
+Provides:
+- Data quality assessment
+- Key findings and statistics
+- Tag generation summary
+- 6 actionable recommendations
+- Additional observations
+
+## 🎯 Key Insights
+
+Example findings from the analysis:
+
+- **Most Affected Platform**: Full-Size Trucks (highest failure rate)
+- **Top Issue**: Heating system failures
+- **Cost Analysis**: Average repair cost $XXX, max $XXX
+- **Age Pattern**: Most failures occur within first 12 months
+- **Common Problems**: Dual functional + cosmetic issues
+
+## 🔧 Customization
+
+### Modify Critical Columns
+Edit the `CRITICAL_COLUMNS` list (line 21):
+```python
+CRITICAL_COLUMNS = [
+    'YOUR_COLUMN_1',
+    'YOUR_COLUMN_2',
+    # ...
+]
+```
+
+### Add New Issue Tags
+Update `ISSUE_KEYWORDS` dictionary (line 33):
+```python
+ISSUE_KEYWORDS = {
+    'your_issue': ['keyword1', 'keyword2', 'keyword3'],
+    # ...
+}
+```
+
+### Change Text Columns for Tagging
+Modify `TEXT_COLUMNS` (line 43):
+```python
+TEXT_COLUMNS = ['YOUR_TEXT_FIELD_1', 'YOUR_TEXT_FIELD_2']
+```
+
+## 📝 Example Usage
+
+```python
+# Basic usage
+python steering_analysis.py
+
+# The script will:
+# 1. Load your Excel file
+# 2. Analyze all columns
+# 3. Clean the data
+# 4. Generate visualizations
+# 5. Create issue tags
+# 6. Produce synthesis report
+# 7. Save cleaned data + charts
+```
+
+## 🐛 Troubleshooting
+
+**Issue**: `FileNotFoundError`  
+**Solution**: Update `INPUT_FILE` path to point to your Excel file
+
+**Issue**: `ModuleNotFoundError: No module named 'openpyxl'`  
+**Solution**: Run `pip install openpyxl`
+
+**Issue**: Charts not displaying  
+**Solution**: Charts are saved as PNG files. Check your working directory.
+
+## 📊 Sample Output
+
+```
+================================================================================
+STEERING WHEEL REPAIR DATA ANALYSIS
+================================================================================
+
+Loading data...
+✓ Dataset Shape: (500, 25)
+✓ Columns: 25
+✓ Records: 500
+
+Column-wise Analysis...
+✓ Categorical Columns: 15
+✓ Numerical Columns: 8
+✓ Date Columns: 2
+
+Data Cleaning...
+✓ Filled missing categorical: PLATFORM
+✓ Standardized all text fields
+
+Generating Visualizations...
+✓ Saved: steering_wheel_analysis.png
+✓ Saved: detailed_analysis.png
+✓ Saved: issue_tags_analysis.png
+
+Tag Generation...
+✓ Generated tags for 500 records
+  - Heating Issue: 45 records (9.0%)
+  - Electrical Issue: 32 records (6.4%)
+  ...
+
+✓ ANALYSIS COMPLETED SUCCESSFULLY!
+```
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 👤 Author
+
+**Your Name**
+- GitHub: [@spoorthyan](https://github.com/yourusername)
+- Email: spoorthyan20@gmail.com
+
+## 🙏 Acknowledgments
+
+- Built for automotive warranty data analysis
+- Designed for stakeholder-friendly insights
+- Optimized for large-scale repair datasets
+
+## 📚 Documentation
+
+For detailed documentation on each function:
+
+```python
+# View function documentation
+help(load_data)
+help(perform_column_analysis)
+help(clean_data)
+# ... etc
+```
+
+---
+
+**⭐ If you find this project useful, please consider giving it a star!**
